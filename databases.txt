@@ -1,0 +1,91 @@
+Create Table profileTalk(
+pID SERIAL Primary Key,
+pImage varchar(55) default 'noPic.jpg',
+pDescription varchar(255) default ' ',
+userID SERIAL REFERENCES account(userID)
+)
+
+Create Table Posts(
+postID SERIAL Primary Key,
+postdate timestamp not null, 1
+userID SERIAL REFERENCES account(userID) 1
+)
+
+
+			'100000007157', 
+                        '100000007169', 
+                        '100000007160', 
+                        '100000007170', 
+                        '100000007165', 
+                        '100000007166', 
+                        '100000007164', 
+                        '100000007162', 
+                        '100000007161'
+
+
+
+ALTER TABLE Posts ALTER COLUMN userID TYPE integer; -alter statement
+
+
+Create Table PostDetails (
+
+--userID INTEGER REFERENCES account(userID)
+
+--r postdetailID SERIAL Primary Key,
+-- r postID serial references Posts(postID),
+
+ -- CONSTRAINT postdetails_pkey PRIMARY KEY (postdetailid),
+
+ -- CONSTRAINT postdetails_postid_fkey FOREIGN KEY (postid)
+
+postID SERIAL Primary Key,
+postdate timestamp not null,
+postText text not null,
+postComments varchar(255),
+postLikes int default 0,
+postCommentDate timestamp default null,
+postLikerID integer default null, 
+postCommmenterID integer default null
+
+)
+
+
+
+CREATE TABLE account
+(
+  userid serial NOT NULL,
+ 
+ username character varying(50) NOT NULL,
+ 
+ usersurname character varying(50) NOT NULL,
+
+  useremail character varying(50) NOT NULL,
+  
+birthdate date NOT NULL,
+ 
+ accnumber integer NOT NULL,
+ 
+ apass character varying(12) NOT NULL,
+ 
+ CONSTRAINT account_pkey PRIMARY KEY (userid)
+)
+WITH 
+(
+  OIDS=FALSE
+);
+ALTER TABLE account
+  OWNER TO postgres;
+
+
+--GET DETAILS FROM THE PROFILE TABLE 
+
+
+SELECT *
+FROM POSTS A
+INNER JOIN POSTDETAILS B ON
+A.POSTID = B.POSTID
+
+
+
+
+
